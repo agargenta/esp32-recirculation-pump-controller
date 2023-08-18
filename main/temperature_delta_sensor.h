@@ -59,7 +59,7 @@ extern "C"
     } temperature_delta_sensor_data_t;
 
     esp_err_t temperature_delta_sensor_open(const temperature_delta_sensor_config_t *config,
-                                            temperature_delta_sensor_t *sensor_p);
+                                            temperature_delta_sensor_t *sensor_out);
 
     esp_err_t temperature_delta_sensor_close(temperature_delta_sensor_t sensor);
 

@@ -24,7 +24,7 @@ extern "C"
         uint32_t state_changes;
     } relay_data_t;
 
-    esp_err_t relay_open(const gpio_num_t gpio_num, relay_t *relay_p);
+    esp_err_t relay_open(const gpio_num_t gpio_num, relay_t *relay_out);
     esp_err_t relay_close(const relay_t relay);
     esp_err_t relay_set_state(const relay_t relay, relay_state_t state);
     relay_state_t relay_get_state(const relay_t relay);

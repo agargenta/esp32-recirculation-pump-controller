@@ -21,10 +21,10 @@ struct relay_s
     SemaphoreHandle_t mutex;   /// synchronization mutex
 };
 
-esp_err_t relay_open(const gpio_num_t gpio_num, relay_t *relay_p)
+esp_err_t relay_open(const gpio_num_t gpio_num, relay_t *relay_out)
 {
     esp_err_t ret = ESP_FAIL;
-    ESP_GOTO_ON_FALSE(relay_p != NULL, ESP_ERR_INVALID_ARG, handle_error, TAG, "null");
+    ESP_GOTO_ON_FALSE(relay_out != NULL, ESP_ERR_INVALID_ARG, handle_error, TAG, "null");
     const relay_t relay = calloc(1, sizeof(struct relay_s));
     ESP_GOTO_ON_FALSE(relay != NULL, ESP_ERR_NO_MEM, handle_error, TAG, "malloc relay");
     relay->gpio_num = gpio_num;
@@ -37,7 +37,7 @@ esp_err_t relay_open(const gpio_num_t gpio_num, relay_t *relay_p)
                       "set level to 0 on GPIO %d", gpio_num);
 
     relay->timestamp = esp_timer_get_time();
-    *relay_p = relay;
+    *relay_out = relay;
     ESP_LOGI(TAG, "Opened (GPIO: %d)", gpio_num);
     return ESP_OK;
 reset_gpio:

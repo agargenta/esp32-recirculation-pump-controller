@@ -105,10 +105,10 @@ static void temperature_delta_sensor_task(void *args)
 }
 
 esp_err_t temperature_delta_sensor_open(const temperature_delta_sensor_config_t *config,
-                                        temperature_delta_sensor_t *sensor_p)
+                                        temperature_delta_sensor_t *sensor_out)
 {
     esp_err_t ret = ESP_FAIL;
-    ESP_GOTO_ON_FALSE(sensor_p != NULL, ESP_ERR_INVALID_ARG, handle_error, TAG, "null");
+    ESP_GOTO_ON_FALSE(sensor_out != NULL, ESP_ERR_INVALID_ARG, handle_error, TAG, "null");
     ESP_GOTO_ON_FALSE(config->sample_period == 0 ||
                           config->sample_period > TEMPERATURE_SENSOR_PAIR_SAMPLE_PERIOD_MIN,
                       ESP_ERR_INVALID_ARG, handle_error, TAG, "invalid sample_period");
@@ -132,7 +132,7 @@ esp_err_t temperature_delta_sensor_open(const temperature_delta_sensor_config_t 
     const BaseType_t r = xTaskCreate(temperature_delta_sensor_task, name, 3072,
                                      (void *)sensor, 1, &(sensor->task));
     ESP_GOTO_ON_FALSE(r == pdPASS, ESP_ERR_NO_MEM, free_mutex, TAG, "create task: %d", r);
-    *sensor_p = sensor;
+    *sensor_out = sensor;
     ESP_LOGI(TAG, "Opened on GPIO %d", config->gpio_num);
     return ESP_OK;
 free_mutex:
