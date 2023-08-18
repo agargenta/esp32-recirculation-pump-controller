@@ -18,8 +18,7 @@ static esp_err_t index_handler(httpd_req_t *req)
 
     ESP_LOGI(TAG, "uri: /");
     // TODO: implement
-    const char *html = "<div><a href=\"/long\">long</a></div>"
-                       "<div><a href=\"/quick\">quick</a></div>";
+    const char *html = "<div>Re-circulation controller</div>";
     return httpd_resp_sendstr(req, html);
 }
 
@@ -40,9 +39,9 @@ esp_err_t httpd_open(const httpd_context_t *context, httpd_handle_t *httpd_out)
     const httpd_uri_t uri_handler = {.method = HTTP_GET, .uri = "/", .handler = index_handler};
     ESP_GOTO_ON_ERROR(httpd_register_uri_handler(httpd, &uri_handler), stop_httpd, TAG, "register GET /");
 
-    httpd_relay_register_handlers(httpd, context->relay);
-    httpd_temperature_delta_sensor_register_handlers(httpd, context->temperature_delta_sensor);
-    httpd_flow_sensor_register_handlers(httpd, context->flow_sensor);
+    ESP_ERROR_CHECK_WITHOUT_ABORT(httpd_relay_register_handlers(httpd, context->relay));
+    ESP_ERROR_CHECK_WITHOUT_ABORT(httpd_temperature_delta_sensor_register_handlers(httpd, context->temperature_delta_sensor));
+    ESP_ERROR_CHECK_WITHOUT_ABORT(httpd_flow_sensor_register_handlers(httpd, context->flow_sensor));
 
     ESP_LOGI(TAG, "Opened httpd on port: %d", config.server_port);
     *httpd_out = httpd;
