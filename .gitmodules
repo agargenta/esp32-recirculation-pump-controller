@@ -1,0 +1,3 @@
+[submodule "components/esp32-pulse-sensor"]
+	path = components/esp32-pulse-sensor
+	url = ../esp32-pulse-sensor

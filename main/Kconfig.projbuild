@@ -1,0 +1,61 @@
+menu "Project Configuration"
+
+    config MAX_ASYNC_REQUESTS
+        int "Max Simultaneous Requests"
+        default 2
+        help
+            The maximum number of simultaneous async requests that the
+            web server can handle.
+
+
+    config TEMPERATURE_SENSORS_GPIO
+        int "Temperature sensors (OneWire) GPIO pin number"
+        default 4
+        help
+            The GPIO pin number where DS18B20 temperature sensors are connected (via OneWire).
+
+    config TEMPERATURE_SENSORS_SAMPLE_PERIOD
+        int "Temperature sensors sample period (ms)"
+        default 10000
+        help
+            The time (in milliseconds) to wait between readings of the temperature sensors.
+            Minimum value is 750ms.
+
+    config FLOW_METER_SENSOR_GPIO
+        int "Flow meter sensor GPIO pin number"
+        default 16
+        help
+            The GPIO pin number where the flow meter is connected. Must support interrupts.
+
+    config FLOW_METER_SENSOR_MIN_PULSES
+        int "Flow meter sensor min pulses"
+        default 20
+        help
+            The minimum number of pulses from the flow meter to register a flow
+
+    config FLOW_METER_SENSOR_PULSES_PER_GALLON
+        int "Flow meter sensor pulses / gallon"
+        default 1840
+        help
+            The number of pulses per gallon of flow. If your sensor's flow rate is expressed as
+            pulses per liter, multiply by 3.78541 and round to the nearest integer value.
+
+    config RELAY_GPIO
+        int "Relay GPIO pin number"
+        default 17
+        help
+            The GPIO pin number where the relay meter is connected. Must support output.
+
+    config HTTPD_PORT
+        int "HTTP Server port"
+        default 80
+        help
+            The port HTTP server will listen on.
+
+    config HTTPD_MAX_OPEN_SOCKETS
+        int "HTTP Server max sockets"
+        default 7
+        help
+            The maximum open sockets for HTTP requests. While the first request is being processed,
+            all other connections are queued. Connection attemps beyond the queue size are refused.
+endmenu
