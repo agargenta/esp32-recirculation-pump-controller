@@ -30,17 +30,17 @@ extern "C"
 
     typedef struct
     {
-        float delta;                                         /// the latest absolute delta (in C)
+        float delta;                                         /// the latest absolute delta (in °C)
         temperature_delta_sensor_t temperature_delta_sensor; /// the temperature delta sensor
         void *notification_arg;                              /// the configured argument
     } temperature_delta_sensor_notification_t;
 
     typedef struct
     {
-        float latest;  /// the latest temperature (in C)
-        float min;     /// the minimum temperature (in C)
-        float max;     /// the maximum temperature (in C)
-        float average; /// the average temperature (in C)
+        float latest;  /// the latest temperature (in °C)
+        float min;     /// the minimum temperature (in °C)
+        float max;     /// the maximum temperature (in °C)
+        float average; /// the average temperature (in °C)
     } temperature_delta_sensor_info_t;
 
     typedef enum

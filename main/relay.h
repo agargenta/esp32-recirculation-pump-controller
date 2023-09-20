@@ -19,7 +19,7 @@ extern "C"
     typedef struct
     {
         relay_state_t current_state;
-        int64_t time_in_current_state;
+        uint64_t time_in_current_state; // microseconds in current state
         uint64_t time_in_state[2];
         uint32_t state_changes;
     } relay_data_t;
