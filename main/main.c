@@ -122,7 +122,7 @@ static void pump_control_task_handler(void *args)
             ESP_LOGW(TAG, "Pump control message receive timeout. Bailing out.");
             break;
         }
-        ESP_LOGI(TAG, "Pump control got message %d", msg.type);
+        ESP_LOGD(TAG, "Got pump control message type: %d", msg.type);
         switch (msg.type)
         {
         case FLOW_STARTED:
